@@ -25,15 +25,14 @@ int main(){
 #if defined(_OPENACC)
   cout << acc_is_present(buff_c,N) << endl;
 #endif
-  auto c = vector<double>(buff_c, buff_c + N);
-  auto start = c.begin(); 
   cout << scientific << setprecision(6); 
-  for (int  i =0; i<4; ++i){
-    for (double val: vector<double>(start, start+5)){  
-      cout << setw(16) << val << " ";
+  for (size_t  i =0, start=0, stop = start + 5 < N ? start +5: N; i<4; ++i){
+    for (size_t j=start; j < stop; ++j){  
+      cout << setw(16) << buff_c[j] << " ";
     }
     cout<< endl; 
     start = start + 5;
+    stop = start + 5 < N ? start + 5: N;
   }
 }
 
